@@ -16,7 +16,7 @@ namespace DemoGrains
 
         public Task<string> SayHello(string msg)
         {
-            logger.LogInformation($"\n {this.GetGrainIdentity()}SayHello 方法收到客户端发来的消息：'{msg}'");
+            logger.LogInformation($"\n SayHello 方法收到客户端发来的消息：'{msg}'");
 
             return Task.FromResult($"客户端发了消息，你不回点都不好意思了。\n来而不往非礼也");
         }

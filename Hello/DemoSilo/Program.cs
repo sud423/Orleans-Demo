@@ -4,6 +4,7 @@ using DemoGrains;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 // 配置 host
 using var host = new SiloHostBuilder()
@@ -14,6 +15,10 @@ using var host = new SiloHostBuilder()
     {
         options.ClusterId = "dev";
         options.ServiceId = "YldDemoService";
+    })
+    .UseAdoNetReminderService(options=> {
+        options.Invariant = "MySql.Data.MySqlClient";
+        options.ConnectionString = "Server=localhost;Port=3306;Database=yld;Uid=root;Pwd=mysql;";
     })
     //应用程序部分：只需引用我们使用的 Grains 实现
     .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
